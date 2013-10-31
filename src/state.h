@@ -5,14 +5,25 @@
 
 class state {
 public:
-    state() {};
-    state( sf::RenderWindow &app );
+    virtual void init()    = 0;
+    virtual void cleanup() = 0;
 
-    ~state() {};
+    virtual void pause()  = 0;
+    virtual void resume() = 0;
 
-    virtual void process_events( std::queue<sf::Event> events ) = 0;
+    virtual void handle_events( std::queue<sf::Event> events ) = 0;
     virtual void update() = 0;
     virtual void render() = 0;
+
+// all derived classes should be singletons,
+// we can't implement it here.
+//    static state *get() {
+//        return &instance;
+//    }
+protected:
+//    static state instance;
+// with a private constructor!
+    state() {};
 };
 
 #endif /* STATE_H */

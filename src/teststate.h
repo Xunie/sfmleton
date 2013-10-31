@@ -4,12 +4,21 @@
 
 class test_state : public state {
 public:
-    test_state( sf::RenderWindow &app );
-    ~test_state();
+    void init();
+    void cleanup();
 
-    void process_events( std::queue<sf::Event> events );
+    void pause();
+    void resume();
+
+    void handle_events( std::queue<sf::Event> events );
     void update();
     void render();
+
+    static test_state *get() {
+        return &instance;
+    }
+private:
+    static test_state instance;
 };
 
 #endif /* TESTSTATE_H */
