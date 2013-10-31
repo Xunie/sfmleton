@@ -3,6 +3,10 @@
 #include "statemanager.h"
 
 
+// singleton instance
+state_manager state_manager::instance;
+
+
 void state_manager::change_state( state *ptr ) {
 }
 

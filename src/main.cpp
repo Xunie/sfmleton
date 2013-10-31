@@ -3,6 +3,9 @@
 #include <queue>
 
 #include <SFML/Graphics.hpp>
+
+#include "statemanager.h"
+#include "teststate.h"
 using namespace std;
 
 
@@ -19,19 +22,22 @@ int main( int argc, char *argv[] ) {
         return EXIT_FAILURE;
     }
 
+
+    // add a state to the state 'stack'
+    state_manager::get()->push_state( test_state::get() );
+
     while( app.isOpen() ) {
-        app.display();
+        // update state
+        state_manager::get()->update();
 
-        queue<sf::Event> event_queue = getInput(app);
+        // render state
+        state_manager::get()->render();
 
-        while( !event_queue.empty() ) {
-            sf::Event e = event_queue.front();
-            event_queue.pop();
-
-            if( e.type == sf::Event::KeyPressed && app.isOpen() )
-                app.close();
-        }
+        // push input/window events to state
+        queue<sf::Event> events = getInput(app);
+        state_manager::get()->handle_events( events );
     }
+
 
     return EXIT_SUCCESS;
 }

@@ -7,6 +7,7 @@
 
 class state_manager {
     std::stack<state*> states;
+
 public:
     void change_state( state *ptr );
     void push_state( state *ptr );
@@ -15,6 +16,15 @@ public:
     void handle_events( std::queue<sf::Event> &events );
     void update();
     void render();
+
+// singleton!
+    static state_manager *get() {
+        return &instance;
+    }
+private:
+    state_manager() {
+    };
+    static state_manager instance;
 };
 
 #endif /* STATEMANAGER_H */

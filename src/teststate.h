@@ -18,6 +18,8 @@ public:
         return &instance;
     }
 private:
+    test_state() {
+    }
     static test_state instance;
 };
 
