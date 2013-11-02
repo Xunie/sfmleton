@@ -2,7 +2,8 @@
 #define TESTSTATE_H
 #include "state.h"
 
-class test_state : public state {
+class test_state : public state::prototype {
+    bool shutdown;
 public:
     void init();
     void cleanup();
@@ -11,16 +12,8 @@ public:
     void resume();
 
     void handle_events( std::queue<sf::Event> events );
-    void update();
-    void render();
-
-    static test_state *get() {
-        return &instance;
-    }
-private:
-    test_state() {
-    }
-    static test_state instance;
+    void update( state::manager &man );
+    void render( sf::RenderWindow &app );
 };
 
 #endif /* TESTSTATE_H */

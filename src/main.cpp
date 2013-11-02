@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "statemanager.h"
+#include "state.h"
 #include "teststate.h"
 using namespace std;
 
@@ -13,7 +13,9 @@ queue<sf::Event> getInput( sf::RenderWindow &app );
 
 
 int main( int argc, char *argv[] ) {
-    sf::RenderWindow app;
+    sf::RenderWindow app; // TODO put this in resource manager?
+    state::manager man;
+
     sf::VideoMode vmode = sf::VideoMode::getDesktopMode(); // TODO change this
     app.create( vmode, "sfmleton", sf::Style::Fullscreen );
 
@@ -22,22 +24,25 @@ int main( int argc, char *argv[] ) {
         return EXIT_FAILURE;
     }
 
+    man.push_state( new test_state );
 
-    // add a state to the state 'stack'
-    state_manager::get()->push_state( test_state::get() );
-
-    while( app.isOpen() ) {
-        // update state
-        state_manager::get()->update();
-
-        // render state
-        state_manager::get()->render();
-
+    while( man.running() ) {
         // push input/window events to state
         queue<sf::Event> events = getInput(app);
-        state_manager::get()->handle_events( events );
-    }
+        man.handle_events( events );
 
+        // update state
+        man.update();
+
+        // window should be open
+        if( !app.isOpen() ) {
+            clog << "SFML RenderWindow not open." << endl;
+            return EXIT_FAILURE;
+        }
+
+        // render state
+        man.render( app );
+    }
 
     return EXIT_SUCCESS;
 }
