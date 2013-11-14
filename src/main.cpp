@@ -28,12 +28,11 @@ int main( int argc, char *argv[] ) {
     man.push( new game::state::test );
 
     while( !man.empty() and app.isOpen() ) {
-        // push input/window events to state
+        // get input/window events
         queue<sf::Event> events = getInput(app);
-        man.top().handle_events( events );
 
         // update state
-        man.top().update( man );
+        man.top().update( events, man );
 
         if( man.empty() )
             break;

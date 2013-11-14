@@ -41,8 +41,7 @@ namespace game {
             virtual void pause()   = 0;
             virtual void resume()  = 0;
 
-            virtual void handle_events( std::queue<sf::Event> events ) = 0;
-            virtual void update( state::manager &man ) = 0;
+            virtual void update( std::queue<sf::Event> events, state::manager &man ) = 0;
             virtual void render( sf::RenderWindow &app ) = 0;
         };
 

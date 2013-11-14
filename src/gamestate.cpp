@@ -19,6 +19,11 @@ void game::state::manager::pop() {
 
     states.top()->cleanup();
     states.pop();
+
+    if( states.empty() )
+        return;
+
+    states.top()->resume();
 }
 
 

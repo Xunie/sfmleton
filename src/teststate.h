@@ -5,10 +5,7 @@
 namespace game {
     namespace state {
         class test : public game::state::prototype {
-            bool enter;
-            bool shutdown;
         public:
-            test() { shutdown = false; };
             void init();
             void cleanup();
 
@@ -16,8 +13,7 @@ namespace game {
             void resume();
 
             // which functions go here?
-            void handle_events( std::queue<sf::Event> events );
-            void update( state::manager &man );
+            void update( std::queue<sf::Event> events, state::manager &man );
             void render( sf::RenderWindow &app );
         };
     };
