@@ -1,25 +1,23 @@
 #include <iostream>
-#include "state.h"
 #include "teststate.h"
 
 
 
-void test_state::init() {
-    shutdown = false;
+void game::state::test::init() {
 }
 
-void test_state::cleanup() {
-}
-
-
-void test_state::pause() {
-}
-
-void test_state::resume() {
+void game::state::test::cleanup() {
 }
 
 
-void test_state::handle_events( std::queue<sf::Event> events ) {
+void game::state::test::pause() {
+}
+
+void game::state::test::resume() {
+}
+
+
+void game::state::test::handle_events( std::queue<sf::Event> events ) {
     while( !events.empty() ) {
         sf::Event e = events.front();
 
@@ -30,11 +28,13 @@ void test_state::handle_events( std::queue<sf::Event> events ) {
     }
 }
 
-void test_state::update( state::manager &man ) {
+void game::state::test::update( state::manager &man ) {
     if( shutdown )
-        man.pop_state();
+        do {
+            man.pop();
+        } while( !man.empty() );
 }
 
-void test_state::render( sf::RenderWindow &app ) {
+void game::state::test::render( sf::RenderWindow &app ) {
     app.display();
 }

@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "state.h"
+#include "gamestate.h"
 #include "teststate.h"
 using namespace std;
 
@@ -13,10 +13,11 @@ queue<sf::Event> getInput( sf::RenderWindow &app );
 
 
 int main( int argc, char *argv[] ) {
-    sf::RenderWindow app; // TODO put this in resource manager?
-    state::manager man;
+    game::state::manager man;
+    game::state::test t;
+    sf::RenderWindow app;
 
-    sf::VideoMode vmode = sf::VideoMode::getDesktopMode(); // TODO change this
+    sf::VideoMode vmode = sf::VideoMode::getDesktopMode();
     app.create( vmode, "sfmleton", sf::Style::Fullscreen );
 
     if( !app.isOpen() ) {
@@ -24,24 +25,27 @@ int main( int argc, char *argv[] ) {
         return EXIT_FAILURE;
     }
 
-    man.push_state( new test_state );
+    man.push( new game::state::test );
 
-    while( man.running() ) {
+    while( !man.empty() and app.isOpen() ) {
         // push input/window events to state
         queue<sf::Event> events = getInput(app);
-        man.handle_events( events );
+        man.top().handle_events( events );
 
         // update state
-        man.update();
+        man.top().update( man );
+
+        if( man.empty() )
+            break;
 
         // window should be open
         if( !app.isOpen() ) {
             clog << "SFML RenderWindow not open." << endl;
-            return EXIT_FAILURE;
+            break;
         }
 
         // render state
-        man.render( app );
+        man.top().render( app );
     }
 
     return EXIT_SUCCESS;
