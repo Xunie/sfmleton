@@ -1,6 +1,6 @@
 #include <queue>
 #include <SFML/Graphics.hpp>
-#include "gamestate.h"
+#include "gamestatemanager.h"
 
 
 

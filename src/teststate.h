@@ -1,6 +1,6 @@
 #ifndef TESTSTATE_H
 #define TESTSTATE_H
-#include "gamestate.h"
+#include "gamestatemanager.h"
 
 namespace game {
     namespace state {
@@ -12,7 +12,6 @@ namespace game {
             void pause();
             void resume();
 
-            // which functions go here?
             void update( std::queue<sf::Event> events, state::manager &man );
             void render( sf::RenderWindow &app );
         };

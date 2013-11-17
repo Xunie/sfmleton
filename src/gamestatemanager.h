@@ -1,5 +1,5 @@
-#ifndef GAMESTATE_H
-#define GAMESTATE_H
+#ifndef GAMESTATEMANAGER_H
+#define GAMESTATEMANAGER_H
 #include <stack>
 #include <queue>
 #include <SFML/Graphics.hpp>
@@ -48,4 +48,4 @@ namespace game {
     }
 }
 
-#endif /* GAMESTATE_H */
+#endif /* GAMESTATEMANAGER_H */

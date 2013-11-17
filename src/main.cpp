@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gamestate.h"
+#include "gamestatemanager.h"
 #include "teststate.h"
 using namespace std;
 
@@ -14,7 +14,6 @@ queue<sf::Event> getInput( sf::RenderWindow &app );
 
 int main( int argc, char *argv[] ) {
     game::state::manager man;
-    game::state::test t;
     sf::RenderWindow app;
 
     sf::VideoMode vmode = sf::VideoMode::getDesktopMode();
