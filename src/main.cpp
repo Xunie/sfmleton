@@ -24,6 +24,11 @@ int main( int argc, char *argv[] ) {
         return EXIT_FAILURE;
     }
 
+    app.setVerticalSyncEnabled( true );
+
+    // prevent partial core melt
+    app.setFramerateLimit(120);
+
     man.push( new game::state::test );
 
     while( !man.empty() and app.isOpen() ) {
