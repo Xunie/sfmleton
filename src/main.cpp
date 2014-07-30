@@ -16,11 +16,25 @@ int main( int argc, char *argv[] ) {
     game::state::manager man;
     sf::RenderWindow app;
 
-    sf::VideoMode vmode = sf::VideoMode::getDesktopMode();
-    app.create( vmode, "sfmleton", sf::Style::Fullscreen );
+    // get resolution
+    sf::VideoMode       vmode = sf::VideoMode::getDesktopMode();
+
+    // we only want OpenGL >= 3.3 contexts
+    sf::ContextSettings hints = sf::ContextSettings();
+    hints.majorVersion = 3;
+    hints.minorVersion = 3;
+
+    app.create( vmode, "sfmleton", sf::Style::Fullscreen, hints );
 
     if( !app.isOpen() ) {
         cerr << "Error creating SFML renderwindow" << endl;
+        return EXIT_FAILURE;
+    }
+
+    // this will not run on your toaster
+    if( app.getSettings().majorVersion < 3
+     or app.getSettings().minorVersion < 3 ) {
+        cerr << "OpenGL >= 3.3 context required, E_TOASTER" << endl;
         return EXIT_FAILURE;
     }
 
