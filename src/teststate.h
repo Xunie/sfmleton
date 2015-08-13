@@ -1,5 +1,7 @@
 #ifndef TESTSTATE_H
 #define TESTSTATE_H
+#include <queue>
+#include <SFML/Window.hpp>
 #include "gamestatemanager.h"
 
 namespace game {
@@ -12,7 +14,7 @@ namespace game {
             void pause();
             void resume();
 
-            void update( std::queue<sf::Event> events, state::manager &man );
+            void update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events );
             void render( sf::RenderWindow &app );
         };
     };

@@ -50,7 +50,7 @@ int main( int argc, char *argv[] ) {
         queue<sf::Event> events = getInput(app);
 
         // update state
-        man.top().update( events, man );
+        man.top().update( app, man, events );
 
         if( man.empty() )
             break;

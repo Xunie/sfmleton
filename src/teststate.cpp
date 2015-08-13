@@ -18,7 +18,7 @@ void game::state::test::resume() {
 }
 
 
-void game::state::test::update( std::queue<sf::Event> events, state::manager &man ) {
+void game::state::test::update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events ) {
     while( !events.empty() ) {
         sf::Event e = events.front();
 
