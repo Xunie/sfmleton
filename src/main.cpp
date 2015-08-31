@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "gamestatemanager.h"
+#include "statemanager.h"
 #include "teststate.h"
 using namespace std;
 
@@ -13,7 +13,7 @@ queue<sf::Event> getInput( sf::RenderWindow &app );
 
 
 int main( int argc, char *argv[] ) {
-    game::state::manager man;
+    state::manager man;
     sf::RenderWindow app;
 
     // get resolution
@@ -35,7 +35,7 @@ int main( int argc, char *argv[] ) {
     if( app.getSettings().majorVersion < 3
      or app.getSettings().minorVersion < 3 ) {
         cerr << "OpenGL >= 3.3 context required, E_TOASTER" << endl;
-        return EXIT_FAILURE;
+        //return EXIT_FAILURE;
     }
 
     app.setVerticalSyncEnabled( true );
@@ -43,7 +43,7 @@ int main( int argc, char *argv[] ) {
     // prevent partial core melt
     app.setFramerateLimit(120);
 
-    man.push( new game::state::test );
+    man.push( new state::test );
 
     while( !man.empty() and app.isOpen() ) {
         // get input/window events

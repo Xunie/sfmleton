@@ -1,10 +1,10 @@
 #include <queue>
 #include <SFML/Graphics.hpp>
-#include "gamestatemanager.h"
+#include "statemanager.h"
 
 
 
-void game::state::manager::push( prototype *ptr ) {
+void state::manager::push( prototype *ptr ) {
     if( !states.empty() )
         states.top()->pause();
 
@@ -13,7 +13,7 @@ void game::state::manager::push( prototype *ptr ) {
 }
 
 
-void game::state::manager::pop() {
+void state::manager::pop() {
     if( states.empty() )
         return;
 
@@ -27,7 +27,7 @@ void game::state::manager::pop() {
 }
 
 
-void game::state::manager::swap( prototype *ptr ) {
+void state::manager::swap( prototype *ptr ) {
     if( !states.empty() ) {
         states.top()->cleanup();
         states.pop();
@@ -39,17 +39,17 @@ void game::state::manager::swap( prototype *ptr ) {
 
 
 
-bool game::state::manager::empty() {
+bool state::manager::empty() {
     return states.empty();
 }
 
 
-size_t game::state::manager::size() {
+size_t state::manager::size() {
     return states.size();
 }
 
 
-game::state::prototype &game::state::manager::top() {
+state::prototype &state::manager::top() {
     if( states.empty() )
         throw; // TODO throw a proper exception here
 

@@ -4,21 +4,21 @@ using namespace std;
 
 
 
-void game::state::test::init() {
+void state::test::init() {
 }
 
-void game::state::test::cleanup() {
-}
-
-
-void game::state::test::pause() {
-}
-
-void game::state::test::resume() {
+void state::test::cleanup() {
 }
 
 
-void game::state::test::update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events ) {
+void state::test::pause() {
+}
+
+void state::test::resume() {
+}
+
+
+void state::test::update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events ) {
     while( !events.empty() ) {
         sf::Event e = events.front();
 
@@ -29,7 +29,7 @@ void game::state::test::update( sf::RenderWindow &app, state::manager &man, std:
                     break;
 
                 case sf::Keyboard::Return:
-                    man.push( new game::state::test );
+                    man.push( new state::test );
                     break;
 
                 default:
@@ -40,6 +40,6 @@ void game::state::test::update( sf::RenderWindow &app, state::manager &man, std:
     }
 }
 
-void game::state::test::render( sf::RenderWindow &app ) {
+void state::test::render( sf::RenderWindow &app ) {
     app.display();
 }

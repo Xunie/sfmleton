@@ -2,21 +2,19 @@
 #define TESTSTATE_H
 #include <queue>
 #include <SFML/Window.hpp>
-#include "gamestatemanager.h"
+#include "statemanager.h"
 
-namespace game {
-    namespace state {
-        class test : public game::state::prototype {
-        public:
-            void init();
-            void cleanup();
+namespace state {
+    class test : public state::prototype {
+    public:
+        void init();
+        void cleanup();
 
-            void pause();
-            void resume();
+        void pause();
+        void resume();
 
-            void update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events );
-            void render( sf::RenderWindow &app );
-        };
+        void update( sf::RenderWindow &app, state::manager &man, std::queue<sf::Event> events );
+        void render( sf::RenderWindow &app );
     };
 };
 
