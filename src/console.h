@@ -4,6 +4,7 @@
 #include <exception>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 class console_t : public std::ostream, public sf::Drawable {
     std::stringbuf buf;
@@ -12,7 +13,7 @@ class console_t : public std::ostream, public sf::Drawable {
 public:
     bool visible;
 
-    console_t() : std::ostream(&buf) {
+    console_t() : std::ostream(&buf), visible(false) {
         ttf.loadFromFile( "font1.ttf" );
     }
 

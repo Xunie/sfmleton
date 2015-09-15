@@ -1,4 +1,3 @@
-#include <queue>
 #include <SFML/Graphics.hpp>
 #include "statemanager.h"
 

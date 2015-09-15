@@ -3,6 +3,7 @@
 #include <queue>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
 #include "statemanager.h"
 #include "teststate.h"

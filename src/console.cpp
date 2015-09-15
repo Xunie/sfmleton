@@ -1,4 +1,6 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 #include "console.h"
 
 console_t console;
