@@ -36,7 +36,7 @@ int main( int argc, char *argv[] ) {
     if( app.getSettings().majorVersion < 3
      or app.getSettings().minorVersion < 3 ) {
         cerr << "OpenGL >= 3.3 context required, E_TOASTER" << endl;
-        //return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
     app.setVerticalSyncEnabled( true );
