@@ -23,5 +23,5 @@ make -j
 
 If you're on MSYS2 MinGW64 like the real pros are, generate build with:
 ```
-cmake -G "MSYS Makefiles" ../
+cmake -G "MSYS Makefiles" ../sfmleton
 ````
