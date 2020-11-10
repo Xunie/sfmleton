@@ -2,7 +2,7 @@
 A skeleton for developing SFML programs
 
 `🗝️ FAST`: Easily and quickly get started with SFML <br/>
-`☠️ LEAN`: Only has features you need 90% all the time <br/>
+`☠️ LEAN`: Only has features you need 90% of the time <br/>
 `🦴 BONE`: Pick a bone with your problem, not yak-shave for 20 days <br/>
 `🏴‍☠️ SHIP`: Supports WIN+LIN (and probably Mac) <br/>
 
