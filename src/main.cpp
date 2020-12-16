@@ -13,6 +13,13 @@ using namespace std;
 queue<sf::Event> getInput( sf::RenderWindow &app );
 
 
+// helper function to compare OpenGL versions between hints/actual acquired settings
+// relies on std::pair<>::operator< operating lexicographically
+pair<unsigned int, unsigned int> make_glversion( const sf::ContextSettings &cs ) {
+    return make_pair( cs.majorVersion, cs.minorVersion );
+}
+
+
 int main( int argc, char *argv[] ) {
     state::manager man;
     sf::RenderWindow app;
@@ -33,33 +40,32 @@ int main( int argc, char *argv[] ) {
     }
 
     // this will not run on your toaster
-    if( app.getSettings().majorVersion < 3
-     or app.getSettings().minorVersion < 3 ) {
+    if( make_glversion(hints) < make_glversion(app.getSettings()) ) {
         cerr << "OpenGL >= 3.3 context required, E_TOASTER" << endl;
         return EXIT_FAILURE;
     }
 
     app.setVerticalSyncEnabled( true );
 
-    // prevent partial core melt
-    app.setFramerateLimit(120);
-
+    // push the initial state onto the state stack
     man.push( new state::test );
 
-    while( !man.empty() and app.isOpen() ) {
+    // main event loop: here's where we run the program
+    while( app.isOpen() and (!man.empty()) ) {
         // get input/window events
         queue<sf::Event> events = getInput(app);
 
         // update state
         man.top().update( app, man, events );
 
+        // If state popped itself off? Stop processing and clean up.
         if( man.empty() )
-            break;
+            return EXIT_SUCCESS;
 
-        // window should be open
+        // We can't continue without a window
         if( !app.isOpen() ) {
-            clog << "SFML RenderWindow not open." << endl;
-            break;
+            clog << "SFML RenderWindow not open, closing program." << endl;
+            return EXIT_SUCCESS;
         }
 
         // render state
