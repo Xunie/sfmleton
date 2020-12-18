@@ -40,7 +40,7 @@ int main( int argc, char *argv[] ) {
     }
 
     // this will not run on your toaster
-    if( make_glversion(hints) < make_glversion(app.getSettings()) ) {
+    if( make_glversion(app.getSettings()) < make_glversion(hints) ) {
         cerr << "OpenGL >= 3.3 context required, E_TOASTER" << endl;
         return EXIT_FAILURE;
     }
